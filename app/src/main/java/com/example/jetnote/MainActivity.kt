@@ -8,8 +8,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jetnote.model.Note
+import com.example.jetnote.screens.NotesScreen
 import com.example.jetnote.ui.theme.JetNoteTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,25 +23,28 @@ class MainActivity : ComponentActivity() {
             JetNoteTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    val notes = remember {
+                        mutableStateListOf<Note>()
+                    }
+                    NotesScreen(notes = notes,
+                        onAddNote = {
+                            notes.add(it)
+                        },
+                        onRemoveNote = {
+                            notes.remove(it)
+                        })
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JetNoteTheme {
-        Greeting("Android")
     }
 }
