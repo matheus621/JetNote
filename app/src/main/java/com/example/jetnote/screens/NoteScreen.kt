@@ -26,7 +26,9 @@ import com.example.jetnote.R
 import com.example.jetnote.components.NoteButton
 import com.example.jetnote.components.NoteInputText
 import com.example.jetnote.model.Note
+import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Composable
 fun NotesScreen(
@@ -105,6 +107,7 @@ fun NoteRow(
     note: Note,
     onNoteClicke: (Note) -> Unit
 ) {
+    val formatter = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
     Surface(
         modifier
             .padding(4.dp)
@@ -122,7 +125,7 @@ fun NoteRow(
             Text(text = note.title, style = MaterialTheme.typography.subtitle2)
             Text(text = note.description, style = MaterialTheme.typography.subtitle1)
             Text(
-                text = note.entryDate.format(DateTimeFormatter.ofPattern("EEE, d MMM")),
+                text = formatter.format(note.entryDate),
                 style = MaterialTheme.typography.caption
             )
         }
