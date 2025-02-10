@@ -107,7 +107,7 @@ fun NoteRow(
     note: Note,
     onNoteClicke: (Note) -> Unit
 ) {
-    val formatter = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
+    val formatter = SimpleDateFormat("EEE, d MMM hh:mm aaa", Locale.getDefault())
     Surface(
         modifier
             .padding(4.dp)
